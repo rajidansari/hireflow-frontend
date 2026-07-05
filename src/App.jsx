@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { refreshApi } from "./api/auth";
 import { jwtDecode } from "jwt-decode";
 import useAuthStore from "./store/authStore";
+import { Route, Routes } from "react-router";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -30,7 +34,20 @@ function App() {
     })();
   }, []);
 
-  return <>{loader ? <p>Loading...</p> : <main className="bg-white"></main>}</>;
+  return (
+    <>
+      {loader ? (
+        <p>Loading...</p>
+      ) : (
+        <Routes>
+          <Route index element={<Home />} />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      )}
+    </>
+  );
 }
 
 export default App;

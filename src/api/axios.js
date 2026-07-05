@@ -5,6 +5,7 @@ import useAuthStore from "../store/authStore";
 const api = axios.create({
   baseURL: config.apiBaseUrl,
   timeout: 5000,
+  withCredentials: true,
 });
 
 api.interceptors.request.use(
@@ -33,16 +34,13 @@ api.interceptors.response.use(
   async function (error) {
     const { config: requestConfig, response } = error;
 
-    requestConfig._isRetry = false;
+    if (requestConfig?.url === "/auth/refresh") {
+      useAuthStore.getState().clearAuth();
+      return Promise.reject(error);
+    }
 
-    if (
-      response?.status === 401 &&
-      response?.data?.message === "Token expired" &&
-      !requestConfig._isRetry
-    ) {
+    if (response?.status === 401 && response?.data?.message === "Token expired") {
       try {
-        requestConfig._isRetry = true;
-
         const res = await api.get("/auth/refresh");
 
         useAuthStore.getState().setAccessToken(res.data.accessToken);
@@ -51,15 +49,9 @@ api.interceptors.response.use(
         return api(requestConfig);
       } catch (error) {
         useAuthStore.getState().clearAuth();
-        window.location.href = "/login";
         return Promise.reject(error);
       }
     } else {
-      // if config deosn't exist, then reject immediately
-      if (!requestConfig) {
-        return Promise.reject(error);
-      }
-
       requestConfig.__retryCount = requestConfig.__retryCount || 0;
 
       // retry condition
