@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import VerifyEmail from "./pages/VerifyEmail";
+import Jobs from "./pages/Jobs";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -32,7 +34,7 @@ function App() {
         setLoader(false);
       }
     })();
-  }, []);
+  }, [setAccessToken, setRole, setUserId]);
 
   return (
     <>
@@ -44,6 +46,9 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+
+          <Route path="/jobs" element={<Jobs />} />
         </Routes>
       )}
     </>

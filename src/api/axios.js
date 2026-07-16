@@ -4,7 +4,7 @@ import useAuthStore from "../store/authStore";
 
 const api = axios.create({
   baseURL: config.apiBaseUrl,
-  timeout: 5000,
+  timeout: 10000,
   withCredentials: true,
 });
 
@@ -57,9 +57,12 @@ api.interceptors.response.use(
       // retry condition
       const isNetworkError = !response;
       const isServerError = response && response.status >= 500;
+      const isGetRequest = requestConfig?.method?.toLowerCase() === "get";
 
       const shouldRetry =
-        requestConfig.__retryCount < MAX_RETRIES && (isNetworkError || isServerError);
+        requestConfig.__retryCount < MAX_RETRIES &&
+        isGetRequest &&
+        (isNetworkError || isServerError);
 
       if (shouldRetry) {
         requestConfig.__retryCount += 1;
