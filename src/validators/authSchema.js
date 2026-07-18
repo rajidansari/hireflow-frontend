@@ -54,9 +54,15 @@ const verifyResetOtpSchema = z.object({
     .length(6, { error: "Otp should be 6 characters long" }),
 });
 
-const resetPasswordSchema = z.object({
-  password: z.string({ error: "Password must be atleast 8 characters long" }),
-});
+const resetPasswordSchema = z
+  .object({
+    password: z.string().min(8, { error: "Password must be atleast 8 characters long" }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    error: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 export {
   registerSchema,

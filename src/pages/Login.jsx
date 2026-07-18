@@ -38,7 +38,6 @@ function Login() {
   const setUserId = useAuthStore((state) => state.setUserId);
 
   const onSubmit = async (data) => {
-    console.log("first");
     try {
       setIsSubmitting(true);
 
@@ -68,7 +67,7 @@ function Login() {
           <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
             <Briefcase className="w-6 h-6 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold text-foreground">JobBoard</span>
+          <span className="text-xl font-bold text-foreground">Hire Flow</span>
         </div>
 
         {/* Heading */}

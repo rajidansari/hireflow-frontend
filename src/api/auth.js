@@ -1,20 +1,42 @@
 import api from "./axios";
 
 // refresh api
-export const refreshApi = async () => {
+const refreshApi = async () => {
   const res = await api.get("/auth/refresh");
 
   return res;
 };
 
-export const registerApi = async (data) => {
+const registerApi = async (data) => {
   return await api.post("/auth/register", data);
 };
 
-export const verifyEmail = async (data) => {
+const verifyEmail = async (data) => {
   return await api.patch("/auth/verify-email", data);
 };
 
-export const loginApi = async (data) => {
+const loginApi = async (data) => {
   return await api.post("/auth/login", data);
+};
+
+const forgotPasswordApi = async (data) => {
+  return await api.post("/auth/forgot-password", data);
+};
+
+const verifyResetOtpApi = async (data) => {
+  return await api.post("/auth/verify-reset-otp", data);
+};
+
+const passwordResetApi = async (data) => {
+  return await api.patch("/auth/reset-password", data);
+};
+
+export {
+  refreshApi,
+  registerApi,
+  verifyEmail,
+  loginApi,
+  forgotPasswordApi,
+  verifyResetOtpApi,
+  passwordResetApi,
 };
