@@ -11,6 +11,7 @@ import Jobs from "./pages/Jobs";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyResetOtp from "./pages/VerifyResetOtp";
+import { SpinnerButton } from "./components/ui/SpinnerButton";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -42,7 +43,7 @@ function App() {
   return (
     <>
       {loader ? (
-        <p>Loading...</p>
+        <SpinnerButton />
       ) : (
         <Routes>
           <Route index element={<Home />} />
