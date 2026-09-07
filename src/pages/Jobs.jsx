@@ -28,6 +28,7 @@ import {
   CheckCircle2,
   AlertCircle,
   SlidersHorizontal,
+  Sparkles,
 } from "lucide-react";
 
 const JOBS_DATA = [
@@ -194,7 +195,7 @@ function Jobs() {
             </nav>
 
             <Button variant="outline" size="sm" className="text-xs sm:text-sm">
-              Discover top roles
+              <Sparkles className="size-3" /> Discover top roles
             </Button>
           </div>
         </div>
