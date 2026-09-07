@@ -28,7 +28,9 @@ import { registerApi } from "@/api/auth";
 import { useForm, Controller } from "react-hook-form";
 import { registerSchema } from "@/validators/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
+import useAuthStore from "@/store/authStore";
+import { toast } from "sonner";
 
 function Register() {
   const {
@@ -43,6 +45,12 @@ function Register() {
       role: "candidate",
     },
   });
+
+  const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
+
+  if (isAuthenticated) {
+    return <Navigate to={"/jobs"} replace />;
+  }
 
   const [role, setRole] = useState("candidate");
 
@@ -62,6 +70,7 @@ function Register() {
       }
     } catch (err) {
       console.error(`Register failed :: ${err}`);
+      toast.error(err.response?.data?.message || "Something went wrong, try again in a moment");
     } finally {
       setIsSubmitting(false);
     }

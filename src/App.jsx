@@ -12,6 +12,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyResetOtp from "./pages/VerifyResetOtp";
 import { SpinnerButton } from "./components/ui/SpinnerButton";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -42,6 +43,7 @@ function App() {
 
   return (
     <>
+      <Toaster />
       {loader ? (
         <SpinnerButton />
       ) : (

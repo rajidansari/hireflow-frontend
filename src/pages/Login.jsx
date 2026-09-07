@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Mail, Lock, Eye, EyeOff, Briefcase } from "lucide-react";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/validators/authSchema";
@@ -11,6 +11,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { loginApi } from "@/api/auth";
 import { jwtDecode } from "jwt-decode";
 import useAuthStore from "@/store/authStore";
+import { toast } from "sonner";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,11 +28,10 @@ function Login() {
   const navigate = useNavigate();
 
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/jobs");
-    }
-  }, [isAuthenticated, navigate]);
+
+  if (isAuthenticated) {
+    return <Navigate to={"/jobs"} replace />;
+  }
 
   const setAccessToken = useAuthStore((state) => state.setAccessToken);
   const setRole = useAuthStore((state) => state.setRole);
@@ -54,6 +54,7 @@ function Login() {
       }
     } catch (err) {
       console.error(`Failed to login :: ${err}`);
+      toast.error(err.response?.data?.message || "Invalid email or password");
     } finally {
       setIsSubmitting(false);
     }
