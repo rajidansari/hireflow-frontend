@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 import VerifyResetOtp from "./pages/VerifyResetOtp";
 import { SpinnerButton } from "./components/ui/SpinnerButton";
 import { Toaster } from "./components/ui/sonner";
+import JobApply from "./pages/JobApply";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -58,6 +59,7 @@ function App() {
           <Route path="/verify-reset-otp" element={<VerifyResetOtp />} />
 
           <Route path="/jobs" element={<Jobs />} />
+          <Route path="/jobs/:jobId/apply" element={<JobApply />} />
         </Routes>
       )}
     </>

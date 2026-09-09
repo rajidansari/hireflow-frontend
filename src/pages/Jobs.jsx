@@ -31,18 +31,8 @@ import {
 
 import { getJobDetailsApi, getJobsApi } from "@/api/jobs";
 import { toast } from "sonner";
-
-function formatSalary(amount) {
-  if (amount >= 10000000) {
-    return `₹${(amount / 10000000).toFixed(1)}Cr`;
-  }
-
-  if (amount >= 100000) {
-    return `₹${(amount / 100000).toFixed(1)}L`;
-  }
-
-  return `₹${amount.toLocaleString("en-IN")}`;
-}
+import { Link } from "react-router";
+import { formatSalary } from "@/utils/formatSalary";
 
 function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -716,15 +706,17 @@ function JobDetailsView({ job, mobile = false }) {
 
       {/* CTA */}
       <div className="space-y-2">
-        <Button className="w-full bg-primary hover:bg-primary/90 cursor-pointer">
-          <CheckCircle2 className="w-4 h-4 mr-2" />
-          Apply now
-        </Button>
+        <Link to={`/jobs/${job.id}/apply`}>
+          <Button className="w-full bg-primary hover:bg-primary/90 cursor-pointer">
+            <CheckCircle2 className="w-4 h-4 mr-2" />
+            Apply now
+          </Button>
+        </Link>
 
-        <Button variant="outline" className="w-full cursor-pointer">
+        {/* <Button variant="outline" className="w-full cursor-pointer">
           <MessageSquare className="w-4 h-4 mr-2" />
           Message recruiter
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
