@@ -45,9 +45,11 @@ function JobApply() {
     }
 
     try {
-      const response = await applyJobApi(jobId, formData);
+      await applyJobApi(jobId, formData);
 
       toast.success("Application submitted");
+
+      navigate("/jobs");
     } catch (err) {
       console.error(`Job application failed :: ${err}`);
 
@@ -78,12 +80,12 @@ function JobApply() {
     <div className="min-h-screen bg-muted/40 text-foreground">
       <header className="border-b bg-background">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 lg:px-6">
-          <a href="#top" className="flex items-center gap-2 text-sm font-bold tracking-tight">
+          <Link to="/jobs" className="flex items-center gap-2 text-sm font-bold tracking-tight">
             <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
               <BriefcaseBusiness className="size-4" />
             </span>
             HireFlow
-          </a>
+          </Link>
           <div className="hidden items-center gap-3 text-xs text-muted-foreground sm:flex">
             <span>Application</span>
             <span className="text-border">/</span>

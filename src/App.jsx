@@ -14,6 +14,8 @@ import VerifyResetOtp from "./pages/VerifyResetOtp";
 import { SpinnerButton } from "./components/ui/SpinnerButton";
 import { Toaster } from "./components/ui/sonner";
 import JobApply from "./pages/JobApply";
+import MyApplications from "./pages/MyApplications";
+import CandidateProfile from "./pages/CandidateProfile";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -60,6 +62,12 @@ function App() {
 
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:jobId/apply" element={<JobApply />} />
+
+          {/* candidate's applications */}
+          <Route path="/my-applications" element={<MyApplications />} />
+
+          {/* candiate profile */}
+          <Route path="/me" element={<CandidateProfile />} />
         </Routes>
       )}
     </>

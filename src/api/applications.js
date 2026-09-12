@@ -8,4 +8,12 @@ const applyJobApi = (jobId, formData) => {
   });
 };
 
-export { applyJobApi };
+const getMyApplicationsApi = () => {
+  return api.get("/applications/my");
+};
+
+const withdrawApplicationApi = (id) => {
+  return api.delete(`/applications/${id}`);
+};
+
+export { applyJobApi, getMyApplicationsApi, withdrawApplicationApi };

@@ -176,19 +176,23 @@ function Jobs() {
             </div>
 
             <nav className="hidden lg:flex items-center gap-8">
-              <button className="text-sm font-medium hover:text-primary">Jobs</button>
+              <Link to={"/my-applications"} className="text-sm font-medium hover:text-primary">
+                My Applications
+              </Link>
 
-              <button className="text-sm font-medium hover:text-primary">Companies</button>
+              <Link className="text-sm font-medium hover:text-primary">Notifications</Link>
 
-              <button className="text-sm font-medium hover:text-primary">Messages</button>
-
-              <button className="text-sm font-medium hover:text-primary">Profile</button>
+              <Link to={"/me"} className="text-sm font-medium hover:text-primary">
+                Profile
+              </Link>
             </nav>
 
-            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
-              <Sparkles className="size-3" />
-              Discover top roles
-            </Button>
+            <Link>
+              <Button variant="outline" size="sm" className="text-xs sm:text-sm cursor-pointer">
+                <Sparkles className="size-3" />
+                Discover top roles
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
