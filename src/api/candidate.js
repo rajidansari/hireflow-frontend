@@ -8,4 +8,12 @@ const updateCandidateProfileApi = (data) => {
   return api.patch("/candidates/me", data);
 };
 
-export { getCandidateProfileApi, updateCandidateProfileApi };
+const updateCandidateCvApi = (formData) => {
+  return api.patch(`candidates/me/cv`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export { getCandidateProfileApi, updateCandidateProfileApi, updateCandidateCvApi };

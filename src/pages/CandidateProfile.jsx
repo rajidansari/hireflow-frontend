@@ -5,7 +5,11 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { getCandidateProfileApi, updateCandidateProfileApi } from "@/api/candidate";
+import {
+  getCandidateProfileApi,
+  updateCandidateCvApi,
+  updateCandidateProfileApi,
+} from "@/api/candidate";
 import { toast } from "sonner";
 import { SpinnerButton } from "@/components/ui/SpinnerButton";
 import { Link, Navigate, useNavigate } from "react-router";
@@ -61,6 +65,16 @@ function CandidateProfile() {
 
       const response = await updateCandidateProfileApi({ ...changedData, skills });
       setProfile(response.data);
+
+      // check for cv update
+      if (cv) {
+        const formData = new FormData();
+        formData.append("cv", cv);
+
+        const res = await updateCandidateCvApi(formData);
+        setCv(res.data);
+      }
+
       toast.success("Profile updated");
     } catch (err) {
       console.error(`Failed to update profile :: ${err}`);
@@ -185,16 +199,17 @@ function CandidateProfile() {
                   </div>
                 </div>
 
-                <div className="mt-6">
+                {/* profile completion percentage */}
+                {/* <div className="mt-6">
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-muted-foreground">Profile completion</span>
-                    <span className="font-medium">82%</span>
+                    <span className="font-medium">{completion}%</span>
                   </div>
 
                   <div className="mt-2 h-2 overflow-hidden rounded-full bg-muted">
-                    <div className="h-full w-[82%] rounded-full bg-primary" />
+                    <div className={`h-full w-[${completion}%] rounded-full bg-primary`} />
                   </div>
-                </div>
+                </div> */}
               </div>
             </Card>
           </aside>
@@ -343,13 +358,18 @@ function CandidateProfile() {
                           <FileText className="size-5" />
                         </div>
 
-                        <div className="min-w-0">
-                          <p className="truncate text-sm font-medium">{cv?.name || "Current CV"}</p>
-
-                          <p className="text-xs text-muted-foreground">
-                            PDF or DOCX · Maximum 5 MB
-                          </p>
-                        </div>
+                        <a
+                          href={cv ? cv.default_cv_url : profile.default_cv_url}
+                          target="_blank"
+                          className="truncate text-sm font-medium hover:underline"
+                        >
+                          {cv?.name || "your_cv.pdf"}
+                          <div className="min-w-0 ">
+                            <p className="text-xs text-muted-foreground">
+                              Click here to see <br /> PDF or DOCX · Maximum 5 MB
+                            </p>
+                          </div>
+                        </a>
                       </div>
 
                       <input
@@ -373,14 +393,14 @@ function CandidateProfile() {
                         onClick={() => fileInput.current?.click()}
                       >
                         <Upload className="mr-2 size-4" />
-                        {cv ? "Replace CV" : "Upload CV"}
+                        {profile.default_cv_url ? "Replace CV" : "Upload CV"}
                       </Button>
                     </div>
                   </div>
                 </div>
 
                 {/* Portfolio */}
-                <FormField label="Portfolio" hint="Optional">
+                <FormField label="Portfolio">
                   <div className="relative">
                     <Link2 className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
 
