@@ -16,6 +16,7 @@ import { Toaster } from "./components/ui/sonner";
 import JobApply from "./pages/JobApply";
 import MyApplications from "./pages/MyApplications";
 import CandidateProfile from "./pages/CandidateProfile";
+import EmployerProfile from "./pages/employer/EmployerProfile";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -68,6 +69,9 @@ function App() {
 
           {/* candiate profile */}
           <Route path="/me" element={<CandidateProfile />} />
+
+          {/* employer */}
+          <Route path="/employer/me" element={<EmployerProfile />} />
         </Routes>
       )}
     </>

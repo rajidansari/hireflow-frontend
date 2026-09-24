@@ -168,7 +168,7 @@ function Jobs() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shrink-0">
                 <Briefcase className="w-5 h-5 text-primary-foreground" />
               </div>
 
@@ -301,7 +301,7 @@ function Jobs() {
                           <p className="text-xs text-muted-foreground">{job.company_name}</p>
                         </div>
 
-                        <Bookmark className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                        <Bookmark className="w-4 h-4 text-muted-foreground shrink-0" />
                       </div>
 
                       <div className="flex items-center gap-2 text-xs text-muted-foreground pt-2 border-t">
@@ -606,7 +606,7 @@ function JobDetailsView({ job, mobile = false }) {
           </div>
 
           {!mobile && (
-            <div className="flex gap-2 flex-shrink-0">
+            <div className="flex gap-2 shrink-0">
               <Button variant="outline" size="sm">
                 <Heart className="w-4 h-4 mr-2" />
                 Save
@@ -671,7 +671,7 @@ function JobDetailsView({ job, mobile = false }) {
       <Card className="p-4">
         <div className="space-y-4">
           <div className="flex items-start gap-3">
-            <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+            <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
 
             <div>
               <p className="font-semibold text-sm">Job location</p>
