@@ -28,9 +28,12 @@ function Login() {
   const navigate = useNavigate();
 
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
+  const isCandidate = useAuthStore((state) => state.role === "candidate");
 
-  if (isAuthenticated) {
+  if (isAuthenticated && isCandidate) {
     return <Navigate to={"/jobs"} replace />;
+  } else if (isAuthenticated && !isCandidate) {
+    return <Navigate to={"/employer/dashboard"} replace />;
   }
 
   const setAccessToken = useAuthStore((state) => state.setAccessToken);
@@ -50,7 +53,13 @@ function Login() {
         setRole(decoded.role);
         setUserId(decoded.userId);
 
-        navigate("/jobs");
+        const role = useAuthStore((state) => state.role);
+
+        if (role === "candidate") {
+          navigate("/jobs", { replace: true });
+        } else if (role === "employer") {
+          navigate("/employer/dashboard", { replace: true });
+        }
       }
     } catch (err) {
       console.error(`Failed to login :: ${err}`);

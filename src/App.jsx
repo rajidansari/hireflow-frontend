@@ -17,6 +17,8 @@ import JobApply from "./pages/JobApply";
 import MyApplications from "./pages/MyApplications";
 import CandidateProfile from "./pages/CandidateProfile";
 import EmployerProfile from "./pages/employer/EmployerProfile";
+import EmployerDashboard from "./pages/employer/EmployerDashboard";
+import JobApplications from "./pages/employer/JobApplications";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -72,6 +74,10 @@ function App() {
 
           {/* employer */}
           <Route path="/employer/me" element={<EmployerProfile />} />
+          <Route path="/employer/dashboard" element={<EmployerDashboard />} />
+
+          {/* job's applications */}
+          <Route path="/jobs/:jobId/applications" element={<JobApplications />} />
         </Routes>
       )}
     </>

@@ -31,8 +31,9 @@ import {
 
 import { getJobDetailsApi, getJobsApi } from "@/api/jobs";
 import { toast } from "sonner";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import { formatSalary } from "@/utils/formatSalary";
+import useAuthStore from "@/store/authStore";
 
 function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -58,6 +59,14 @@ function Jobs() {
 
   // job details
   const [selectedJob, setSelectedJob] = useState(null);
+
+  // role redirect
+  const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
+  const isEmployer = useAuthStore((state) => state.role === "employer");
+
+  if (isAuthenticated && isEmployer) {
+    return <Navigate to={"/employer/dashboard"} replace />;
+  }
 
   // Fetch jobs
   useEffect(() => {
