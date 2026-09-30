@@ -97,10 +97,12 @@ function EmployerDashboard() {
               Manage your open roles and connect with the right candidates.
             </p>
           </div>
-          <Button>
-            <Plus className="mr-2 size-4" />
-            Post a new job
-          </Button>
+          <Link to={"/employer/jobs/new"}>
+            <Button className="cursor-pointer">
+              <Plus className="mr-2 size-4" />
+              Post a new job
+            </Button>
+          </Link>
         </div>
 
         <section aria-label="Job metrics" className="mt-8 grid gap-4 sm:grid-cols-3">

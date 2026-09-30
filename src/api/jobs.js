@@ -24,10 +24,16 @@ const getJobApplicationsApi = (jobId, params) => {
   return api.get(`/jobs/${jobId}/applications`, { params });
 };
 
+// create job
+const createJobApi = (data) => {
+  return api.post("/jobs", data);
+};
+
 export {
   getJobsApi,
   getJobDetailsApi,
   getEmployerPostedJobsApi,
   deletePostedJobApi,
   getJobApplicationsApi,
+  createJobApi,
 };

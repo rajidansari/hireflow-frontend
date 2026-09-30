@@ -19,6 +19,7 @@ import CandidateProfile from "./pages/CandidateProfile";
 import EmployerProfile from "./pages/employer/EmployerProfile";
 import EmployerDashboard from "./pages/employer/EmployerDashboard";
 import JobApplications from "./pages/employer/JobApplications";
+import CreateJob from "./pages/employer/CreateJob";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -78,6 +79,9 @@ function App() {
 
           {/* job's applications */}
           <Route path="/jobs/:jobId/applications" element={<JobApplications />} />
+
+          {/* post job */}
+          <Route path="/employer/jobs/new" element={<CreateJob />} />
         </Routes>
       )}
     </>
