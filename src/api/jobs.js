@@ -19,4 +19,15 @@ const deletePostedJobApi = (jobid) => {
   return api.delete(`/jobs/${jobid}`);
 };
 
-export { getJobsApi, getJobDetailsApi, getEmployerPostedJobsApi, deletePostedJobApi };
+// employer's job applications
+const getJobApplicationsApi = (jobId, params) => {
+  return api.get(`/jobs/${jobId}/applications`, { params });
+};
+
+export {
+  getJobsApi,
+  getJobDetailsApi,
+  getEmployerPostedJobsApi,
+  deletePostedJobApi,
+  getJobApplicationsApi,
+};

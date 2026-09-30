@@ -16,4 +16,9 @@ const withdrawApplicationApi = (id) => {
   return api.delete(`/applications/${id}`);
 };
 
-export { applyJobApi, getMyApplicationsApi, withdrawApplicationApi };
+// update application status
+const updateApplicationStatusApi = ({ applicationId, status }) => {
+  return api.patch(`/applications/${applicationId}/status`, { status });
+};
+
+export { applyJobApi, getMyApplicationsApi, withdrawApplicationApi, updateApplicationStatusApi };

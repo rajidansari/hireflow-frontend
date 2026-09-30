@@ -29,8 +29,15 @@ function EmployerProfile() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // check auth & role
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
   const isEmployer = useAuthStore((state) => state.role === "employer");
+
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} replace />;
+  } else if (!isEmployer) {
+    return <Navigate to={"/login"} replace />;
+  }
 
   // validation
   const {
@@ -49,22 +56,6 @@ function EmployerProfile() {
       bio: "",
     },
   });
-
-  // check auth
-  if (!isAuthenticated) {
-    return <Navigate to={"/login"} replace />;
-  }
-
-  // check user role
-  if (!isEmployer) {
-    const setAccessToken = useAuthStore((state) => state.setAccessToken);
-
-    setAccessToken(null);
-
-    toast.error("Unauthorized access denied");
-
-    return <Navigate to={"/login"} replace />;
-  }
 
   // fetch employer profile
   useEffect(() => {

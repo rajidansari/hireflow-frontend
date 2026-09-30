@@ -29,7 +29,9 @@ function EmployerDashboard() {
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
   const isEmployer = useAuthStore((state) => state.role === "employer");
 
-  if (isAuthenticated && !isEmployer) {
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} replace />;
+  } else if (!isEmployer) {
     return <Navigate to={"/login"} replace />;
   }
 
