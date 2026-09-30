@@ -29,6 +29,11 @@ const createJobApi = (data) => {
   return api.post("/jobs", data);
 };
 
+// update job
+const updateJobApi = (jobId, data) => {
+  return api.patch(`/jobs/${jobId}`, data);
+};
+
 export {
   getJobsApi,
   getJobDetailsApi,
@@ -36,4 +41,5 @@ export {
   deletePostedJobApi,
   getJobApplicationsApi,
   createJobApi,
+  updateJobApi,
 };

@@ -6,6 +6,7 @@ import {
   BriefcaseBusiness,
   CheckCircle2,
   Clock3,
+  Edit,
   Eye,
   MoreHorizontal,
   Plus,
@@ -241,14 +242,17 @@ function JobRow({ job, onDelete, onApplications }) {
             <Trash2 className="size-4" />
             Delete job
           </Button>
-          <Button
-            aria-label={`More options for ${job.title}`}
-            size="icon"
-            variant="ghost"
-            className="hidden sm:inline-flex"
-          >
-            <MoreHorizontal className="size-4" />
-          </Button>
+          <Link to={`/employer/jobs/${job.id}/edit`}>
+            <Button
+              aria-label={`Edit job`}
+              title={"Edit job"}
+              size="icon"
+              variant="outline"
+              className="hidden sm:inline-flex cursor-pointer"
+            >
+              <Edit className="size-4" />
+            </Button>
+          </Link>
         </div>
       </div>
     </Card>

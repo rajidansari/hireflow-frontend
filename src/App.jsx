@@ -20,6 +20,7 @@ import EmployerProfile from "./pages/employer/EmployerProfile";
 import EmployerDashboard from "./pages/employer/EmployerDashboard";
 import JobApplications from "./pages/employer/JobApplications";
 import CreateJob from "./pages/employer/CreateJob";
+import EditJob from "./pages/employer/EditJob";
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -82,6 +83,9 @@ function App() {
 
           {/* post job */}
           <Route path="/employer/jobs/new" element={<CreateJob />} />
+
+          {/* edit job */}
+          <Route path="/employer/jobs/:jobId/edit" element={<EditJob />} />
         </Routes>
       )}
     </>
