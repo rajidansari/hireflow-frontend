@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
+  Bell,
   BriefcaseBusiness,
   CheckCircle2,
-  Clock3,
   Edit,
-  Eye,
-  MoreHorizontal,
   Plus,
   Trash2,
   Users,
@@ -21,10 +19,14 @@ import { deletePostedJobApi, getEmployerPostedJobsApi } from "@/api/jobs";
 import { toast } from "sonner";
 import { SpinnerButton } from "@/components/ui/SpinnerButton";
 import useAuthStore from "@/store/authStore";
+import NotificationsDrawer from "@/components/NotificationsDrawer";
 
 function EmployerDashboard() {
   const [jobs, setJobs] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // notifications
+  const [open, setOpen] = useState(false);
 
   // check auth & role
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
@@ -84,7 +86,14 @@ function EmployerDashboard() {
             <Link to={"/employer/me"} className="hidden text-sm sm:inline">
               Profile
             </Link>
-            <Link className="hidden text-sm sm:inline">Notifications</Link>
+            <Button
+              onClick={() => setOpen(true)}
+              variant="outline"
+              className="hidden text-sm sm:inline cursor-pointer"
+              title={"Notifications"}
+            >
+              <Bell />
+            </Button>
           </div>
         </div>
       </header>
@@ -162,6 +171,9 @@ function EmployerDashboard() {
           </div>
         </section>
       </div>
+
+      {/* Notifications */}
+      <NotificationsDrawer open={open} setOpen={setOpen} />
     </main>
   );
 }

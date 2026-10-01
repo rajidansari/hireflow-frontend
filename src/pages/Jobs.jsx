@@ -20,13 +20,11 @@ import {
   Share2,
   Search,
   MapPin,
-  Users,
   Bookmark,
-  MessageSquare,
   CheckCircle2,
-  AlertCircle,
   SlidersHorizontal,
   Sparkles,
+  Bell,
 } from "lucide-react";
 
 import { getJobDetailsApi, getJobsApi } from "@/api/jobs";
@@ -34,6 +32,7 @@ import { toast } from "sonner";
 import { Link, Navigate } from "react-router";
 import { formatSalary } from "@/utils/formatSalary";
 import useAuthStore from "@/store/authStore";
+import NotificationsDrawer from "@/components/NotificationsDrawer";
 
 function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -59,6 +58,9 @@ function Jobs() {
 
   // job details
   const [selectedJob, setSelectedJob] = useState(null);
+
+  // notification drawer
+  const [open, setOpen] = useState(false);
 
   // role redirect
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
@@ -189,19 +191,28 @@ function Jobs() {
                 My Applications
               </Link>
 
-              <Link className="text-sm font-medium hover:text-primary">Notifications</Link>
-
               <Link to={"/me"} className="text-sm font-medium hover:text-primary">
                 Profile
               </Link>
             </nav>
 
-            <Link>
-              <Button variant="outline" size="sm" className="text-xs sm:text-sm cursor-pointer">
-                <Sparkles className="size-3" />
-                Discover top roles
+            <div className="flex items-center gap-4">
+              <Button
+                onClick={() => setOpen(true)}
+                variant="outline"
+                className="hidden text-sm sm:inline cursor-pointer"
+                title={"Notifications"}
+              >
+                <Bell />
               </Button>
-            </Link>
+
+              <Link>
+                <Button variant="outline" size="sm" className="text-xs sm:text-sm cursor-pointer">
+                  <Sparkles className="size-3" />
+                  Discover top roles
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
@@ -581,6 +592,9 @@ function Jobs() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Notifications */}
+      <NotificationsDrawer open={open} setOpen={setOpen} />
     </div>
   );
 }
