@@ -1,16 +1,73 @@
-# React + Vite
+# HireFlow — Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend client for **HireFlow**, a full-stack job board platform built with React and Vite.
 
-Currently, two official plugins are available:
+HireFlow provides separate experiences for candidates and employers, including job discovery, applications, profiles, job management, applicant management, and notifications.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
 
-## React Compiler
+- React
+- Vite
+- React Router
+- Zustand
+- Axios
+- React Hook Form
+- Zod
+- Tailwind CSS
+- shadcn/ui
+- Lucide React
+- Sonner
+- JWT
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+### Candidate
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Browse available jobs
+- View job details
+- Apply for jobs
+- Track submitted applications
+- Withdraw applications
+- Track application status
+- Manage candidate profile
+- Upload/update CV
+- View notifications
+- Mark notifications as read
+- Delete notifications
+
+### Employer
+
+- Manage employer profile
+- Create job listings
+- Edit job listings
+- View and manage posted jobs
+- View applicants for individual jobs
+- Filter applicants by application status
+- Update application status
+- Receive application-related notifications
+
+### Authentication
+
+- User registration
+- Email OTP verification
+- Login
+- JWT-based authentication
+- Automatic access-token refresh
+- Role-based navigation
+- Candidate and employer access flows
+- Protected routes
+
+## Project Structure
+
+```text
+src/
+├── api/            # API request functions
+├── components/     # Reusable UI components
+├── pages/          # Application pages
+├── hooks/          # Custom React hooks
+├── store/          # Zustand stores
+├── lib/            # Utilities and configuration
+├── schemas/        # Zod validation schemas
+├── App.jsx
+└── main.jsx
+```
