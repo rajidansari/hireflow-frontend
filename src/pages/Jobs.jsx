@@ -66,10 +66,6 @@ function Jobs() {
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
   const isEmployer = useAuthStore((state) => state.role === "employer");
 
-  if (isAuthenticated && isEmployer) {
-    return <Navigate to={"/employer/dashboard"} replace />;
-  }
-
   // Fetch jobs
   useEffect(() => {
     const fetchJobs = async () => {

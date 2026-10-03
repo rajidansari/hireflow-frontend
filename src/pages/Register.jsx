@@ -46,6 +46,8 @@ function Register() {
     },
   });
 
+  const navigate = useNavigate();
+
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
 
   if (isAuthenticated) {
@@ -56,8 +58,6 @@ function Register() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);

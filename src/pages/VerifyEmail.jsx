@@ -42,7 +42,11 @@ function VerifyEmail() {
         setRole(decoded.role);
         setUserId(decoded.userId);
 
-        navigate("/jobs");
+        if (decoded.role === "candidate") {
+          navigate("/jobs", { replace: true });
+        } else if (decoded.role === "employer") {
+          navigate("/employer/dashboard", { replace: true });
+        }
       }
     } catch (err) {
       console.error(`Failed to verify email :: ${err}`);

@@ -30,15 +30,15 @@ function Login() {
   const isAuthenticated = useAuthStore((state) => state.accessToken !== null);
   const isCandidate = useAuthStore((state) => state.role === "candidate");
 
+  const setAccessToken = useAuthStore((state) => state.setAccessToken);
+  const setRole = useAuthStore((state) => state.setRole);
+  const setUserId = useAuthStore((state) => state.setUserId);
+
   if (isAuthenticated && isCandidate) {
     return <Navigate to={"/jobs"} replace />;
   } else if (isAuthenticated && !isCandidate) {
     return <Navigate to={"/employer/dashboard"} replace />;
   }
-
-  const setAccessToken = useAuthStore((state) => state.setAccessToken);
-  const setRole = useAuthStore((state) => state.setRole);
-  const setUserId = useAuthStore((state) => state.setUserId);
 
   const onSubmit = async (data) => {
     try {
@@ -47,17 +47,16 @@ function Login() {
       const response = await loginApi(data);
 
       if (response.status === 200) {
-        setAccessToken(response.data.accessToken);
-        const decoded = jwtDecode(response.data.accessToken);
+        const accessToken = response.data.accessToken;
+        const decoded = jwtDecode(accessToken);
 
+        setAccessToken(accessToken);
         setRole(decoded.role);
         setUserId(decoded.userId);
 
-        const role = useAuthStore((state) => state.role);
-
-        if (role === "candidate") {
+        if (decoded.role === "candidate") {
           navigate("/jobs", { replace: true });
-        } else if (role === "employer") {
+        } else if (decoded.role === "employer") {
           navigate("/employer/dashboard", { replace: true });
         }
       }
